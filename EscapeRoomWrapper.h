@@ -10,7 +10,11 @@ namespace mtm{
 namespace escaperoom {
 
     class EscapeRoomWrapper{
+    private:
+        EscapeRoom room;
+
     public:
+
         // Constructs a new Escape Room with the specified data.
         //
         // @param name : the name of the escape room.
