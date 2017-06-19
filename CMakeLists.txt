@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -Werror -pedantic-errors -DNDEBUG")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES test1.cpp Company.h Enigma.h EscapeRoom.c EscapeRoom.h EscapeRoomWrapper.h Exceptions.h mtmtest.h list_example.cpp)
 add_executable(HW04 ${SOURCE_FILES})
