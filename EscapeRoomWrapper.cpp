@@ -21,7 +21,7 @@ EscapeRoomWrapper::EscapeRoomWrapper(const EscapeRoomWrapper& room)
     this->room = escapeRoomCopy(room.room);
 }
 
-EscapeRoomWrapper& operator=(const EscapeRoomWrapper& room)
+EscapeRoomWrapper& EscapeRoomWrapper::operator=(const EscapeRoomWrapper& room)
 {
     if(this == &room){
         return *this;
@@ -33,22 +33,22 @@ EscapeRoomWrapper& operator=(const EscapeRoomWrapper& room)
     return *this;
 }
 
-bool operator==(const EscapeRoomWrapper& room) const
+bool EscapeRoomWrapper::operator==(const EscapeRoomWrapper& room) const
 {
     return areEqualRooms(this->room, room.room);
 }
 
-bool operator!=(const EscapeRoomWrapper& room) const
+bool EscapeRoomWrapper::operator!=(const EscapeRoomWrapper& room) const
 {
     return !(*this == room);
 }
 
-bool operator<(const EscapeRoomWrapper& room) const
+bool EscapeRoomWrapper::operator<(const EscapeRoomWrapper& room) const
 {
     return isBiggerRoom(room.room, this->room);
 }
 
-bool operator>(const EscapeRoomWrapper& room) const
+bool EscapeRoomWrapper::operator>(const EscapeRoomWrapper& room) const
 {
     return isBiggerRoom(this->room, room.room);
 }

@@ -1,6 +1,6 @@
 #include "EscapeRoomWrapper.h"
-#include "ScaryRoom.h"
-#include "KidsRoom.h"
+//#include "ScaryRoom.h"
+//#include "KidsRoom.h"
 #include "Company.h"
 #include "mtmtest.h"
 #include <assert.h>
