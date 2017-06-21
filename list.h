@@ -5,7 +5,7 @@
 #include <cassert>
 
 
-template <class T, class compare>
+template <class T>
 class Node {
     Node* next;
     Node* previous;
@@ -20,17 +20,32 @@ public:
         if(next) next->previous = this;
     }
 
+    //copy constructor
+    Node(const Node& node)
+    {
+        data(new T(node.data));
+        previous = node.previous;
+        next = node.next;
+    }
+
+    //destructor
+    ~Node()
+    {
+        delete data;
+    }
+    //returns the data of and object
     const T& getData() const
     {
         assert(this->data != NULL);
         return *this->data;
     }
-
+    //returns a pointer to the next node
     Node* getNext() const
     {
         return this->next;
     }
 
+    //returns a pointer to the previous node
     Node* getPrevious() const
     {
         return this->previous;
@@ -50,8 +65,15 @@ public:
 
     void setData(const T& data)
     {
+        if(this->data) delete this->data;
         this->data = new T(data);
     }
+
+
+
+
+
+
 
 
 

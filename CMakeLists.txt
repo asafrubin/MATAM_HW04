@@ -11,7 +11,10 @@ set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -Werror -pedantic-errors -DNDEBUG")
 #Test Wrapper And Enigma
 #set(SOURCE_FILES test1.cpp  Enigma.h EscapeRoom.c EscapeRoom.h EscapeRoomWrapper.h Exceptions.h mtmtest.h EscapeRoomWrapper.cpp Enigma.cpp Enigma_test.cpp)
 
+#List
+set(SOURCE_FILES list.h list_test.cpp)
+
 #Test Enigma
-set(SOURCE_FILES Enigma.h Enigma.cpp Enigma_test.cpp list.h)
+#set(SOURCE_FILES Enigma.h Enigma.cpp Enigma_test.cpp list.h)
 
 add_executable(HW04 ${SOURCE_FILES})
