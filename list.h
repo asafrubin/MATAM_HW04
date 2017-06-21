@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <cassert>
+#include <iostream>
 
 
 template <class T>
@@ -72,19 +73,80 @@ public:
 
 
 
-
-
-
-
-
-
 };
 
-template <class T>
+typedef class T T;
+template <class T, class Compare, class Predicate>
 class List{
 
 };
 
+class List{
+    Node *first;
+    //Node *last;
+    int num_of_elements;
+    Iterator<T> iterator;
 
+    public:
+        class Iterator<T> {
+        private:
+            Node<T>* iterator;
+        public:
+            friend class List;
+            /**
+             *
+             */
+            void Iterator::operator--() const {
+                if(this->iterator == 0){
+                    throw std::runtime_error("Element not found");
+                }
+                this->iterator == this->iterator->getNext();
+            }
+            /**
+             *
+             */
+            void Iterator::operator++() const {
+                //this->iterator++;
+                this->iterator == this->iterator->getPrevious();
+            }
+
+            Node* Iterator::operator*() const {
+                if(this->iterator == 0){
+                    throw std::runtime_error("Element not found");
+                }
+                return iterator;
+            }
+        }
+        /**
+         *
+         */
+        Iterator<T> begin(){
+             while(*iterator != first){
+               Iterator.iterator--;
+             }
+            return iterator;
+        }
+        /**
+       *
+       * @return
+       */
+        Iterator<T> end()
+        {
+            Iterator iterator1 = List->last;
+            while(iterator.iterator->getNext()){
+                Iterator.iterator++;
+            }
+            return ;
+        }
+        void insert(const T& data, Iterator<T>iterator);
+        void insert(const T& data);
+        void remove(Iterator<T>iterator);
+        Iterator<T> find(const Predicate& predicate);
+        void sort(const Compare& compare);
+        int getSize();
+
+        List(void){ first = NULL; }
+        void print();
+    };
 
 #endif //HW04_LIST_H
