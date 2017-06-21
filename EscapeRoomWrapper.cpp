@@ -1,4 +1,5 @@
 #include "EscapeRoomWrapper.h"
+#include "Exceptions.h"
 
 using namespace mtm::escaperoom;
 
@@ -8,6 +9,9 @@ const int default_max_visitors = 6;
 EscapeRoomWrapper::EscapeRoomWrapper(char* name, const int& escapeTime, const int& level, const int& maxParticipants)
 {
     room = escapeRoomCreate(name, escapeTime, maxParticipants, level);
+    if(room == NULL){
+        throw EscapeRoomMemoryProblemException();
+    }
 }
 
 EscapeRoomWrapper::EscapeRoomWrapper(char* name, const int& level)
@@ -27,7 +31,7 @@ EscapeRoomWrapper& EscapeRoomWrapper::operator=(const EscapeRoomWrapper& room)
         return *this;
     }
 
-    delete this;
+    escapeRoomDestroy(this->room);
     *this = EscapeRoomWrapper(room);
 
     return *this;
