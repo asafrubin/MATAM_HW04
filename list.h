@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cassert>
 #include <iostream>
+#include "Exceptions.h"
 
 
 template <class T>
@@ -69,60 +70,53 @@ public:
         if(this->data) delete this->data;
         this->data = new T(data);
     }
-
-
-
-
 };
 
-typedef class T T;
 template <class T, class Compare, class Predicate>
-class List{
-
-};
-
 class List{
     Node *first;
     //Node *last;
+
     int num_of_elements;
     Iterator<T> iterator;
+
 
     public:
         class Iterator<T> {
         private:
-            Node<T>* iterator;
+            Node *node;
         public:
             friend class List;
             /**
              *
              */
-            void Iterator::operator--() const {
-                if(this->iterator == 0){
+            void Iterator::operator--() {
+                if(this->node == 0){
                     throw std::runtime_error("Element not found");
                 }
-                this->iterator == this->iterator->getNext();
+                this->node = this->node->getNext();
             }
+
             /**
              *
              */
-            void Iterator::operator++() const {
-                //this->iterator++;
-                this->iterator == this->iterator->getPrevious();
+            void Iterator::operator++() {
+                this->node = this->node->getPrevious();
             }
 
             Node* Iterator::operator*() const {
-                if(this->iterator == 0){
+                if(this->node == 0){
                     throw std::runtime_error("Element not found");
                 }
-                return iterator;
+                return node;
             }
         }
         /**
          *
          */
         Iterator<T> begin(){
-             while(*iterator != first){
-               Iterator.iterator--;
+             while(node != first){
+               Iterator.node--;
              }
             return iterator;
         }
@@ -133,17 +127,30 @@ class List{
         Iterator<T> end()
         {
             Iterator iterator1 = List->last;
-            while(iterator.iterator->getNext()){
-                Iterator.iterator++;
+            while(iterator.node->getNext()){
+                Iterator.node++;
             }
             return ;
         }
         void insert(const T& data, Iterator<T>iterator);
         void insert(const T& data);
-        void remove(Iterator<T>iterator);
+        void remove(Iterator iterator)
+        {
+            Node *tempNode;
+            if(this->num_of_elements == 0) throw mtm::ListExceptions::ElementNotFound();
+            iterator.node->getNext()->setPrevious(iterator.node->getPrevious());
+            iterator.node->getPrevious()->setNext(iterator.node->getNext());
+
+            delete iterator;
+        }
         Iterator<T> find(const Predicate& predicate);
-        void sort(const Compare& compare);
-        int getSize();
+
+        void sort(const Compare& compare)
+        {
+
+        }
+
+        const int& getSize() const { return this->num_of_elements; }
 
         List(void){ first = NULL; }
         void print();
