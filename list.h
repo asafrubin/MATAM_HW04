@@ -75,78 +75,159 @@ public:
 
 };
 
-typedef class T T;
 template <class T, class Compare, class Predicate>
 class List{
-
-};
-
-class List{
     Node *first;
-    //Node *last;
     int num_of_elements;
-    Iterator<T> iterator;
+    Iterator iterator;
 
     public:
-        class Iterator<T> {
+        class Iterator {
         private:
-            Node<T>* iterator;
+            Node* node;
         public:
             friend class List;
+
             /**
              *
              */
-            void Iterator::operator--() const {
-                if(this->iterator == 0){
+            void Iterator::operator--() {
+                if(this->node->getPrevious()){
                     throw std::runtime_error("Element not found");
                 }
-                this->iterator == this->iterator->getNext();
-            }
-            /**
-             *
-             */
-            void Iterator::operator++() const {
-                //this->iterator++;
-                this->iterator == this->iterator->getPrevious();
+                this->node = this->node->getPrevious();
             }
 
-            Node* Iterator::operator*() const {
-                if(this->iterator == 0){
+            /**
+             *
+             */
+            void Iterator::operator++() {
+                this->node = this->node->getNext();
+            }
+
+            /**
+             *
+             * @return
+             */
+            Node* Iterator::operator*() {
+                if(this->node == 0){
                     throw std::runtime_error("Element not found");
                 }
-                return iterator;
+                return iterator.node;
             }
-        }
+        };
         /**
          *
          */
-        Iterator<T> begin(){
-             while(*iterator != first){
-               Iterator.iterator--;
-             }
+        Iterator begin(){
+             iterator.node = first;
             return iterator;
         }
+
         /**
        *
        * @return
        */
-        Iterator<T> end()
+        Iterator end()
         {
-            Iterator iterator1 = List->last;
-            while(iterator.iterator->getNext()){
-                Iterator.iterator++;
+            while(iterator.node->getNext()){
+                iterator.node++;
             }
-            return ;
+            return iterator;
         }
-        void insert(const T& data, Iterator<T>iterator);
-        void insert(const T& data);
-        void remove(Iterator<T>iterator);
-        Iterator<T> find(const Predicate& predicate);
-        void sort(const Compare& compare);
-        int getSize();
 
-        List(void){ first = NULL; }
-        void print();
+        /**
+         *
+         * @param data
+         * @param iterator
+         */
+        void insert(const T& data, Iterator iterator)
+        {
+            Node(data, iterator.node->getPrevious(), iterator.node->getNext());
+            num_of_elements++;
+        }
+
+        /**
+         *
+         * @param data
+         */
+        void insert(const T& data)
+        {
+            Iterator tempI;
+            tempI.node = this->first;
+            while (tempI.node->getNext()){
+                tempI.node++;
+            }
+            insert(data, tempI);
+            num_of_elements++;
+            return;
+        }
+
+        /**
+         *
+         * @param iterator
+         */
+        void remove(Iterator iterator)
+        {
+            iterator.node->getPrevious()->setNext(iterator.node->getNext());
+            iterator.node->getNext()->setPrevious(iterator.node->getPrevious());
+            num_of_elements--;
+            delete *iterator.node;
+        }
+
+        /**
+         *
+         * @param predicate
+         * @return
+         */
+        Iterator find(const Predicate& predicate)
+        {
+            iterator.node = first;
+            while (!predicate(iterator.node->getData())){
+                if(iterator.node->getNext()) {
+                    iterator.node++;
+                } else break;
+            }
+            return iterator;
+        }
+
+        /**
+         *
+         * @param compare
+         */
+        void sort(const Compare& compare)
+        {
+            int tempsize = num_of_elements;
+            iterator.node = first;
+            for(int i = 0 , i < tempsize, i++){
+                if(compare(iterator.node->getData() , iterator.node->getNext()->getData())){
+                    swapNodes(iterator.node, iterator.node->getNext());
+                }
+                iterator++;
+
+            }
+        }
+
+        /**
+         *
+         */
+        void swapNodes(Node& const node1, Node& const node2){
+            Node tempNode;
+            tempNode.setData(node1.getData());
+            node1.setData(node2.getData());
+            node2.setData(tempNode.getData());
+        }
+
+        /**
+         *
+         * @return
+         */
+        int getSize()
+        {
+
+        }
+
+
     };
 
 #endif //HW04_LIST_H
