@@ -17,10 +17,10 @@ namespace escaperoom{
     } Difficulty;
 
     class Enigma{
-    private:
         std::string name;
         Difficulty difficulty;
         int numOfElements;
+        set<string> elements;
     public:
 
         // Constructs a new Enigma with the specified data.
@@ -30,6 +30,10 @@ namespace escaperoom{
         // @param numOfElements : the number of elements in the enigma.
         Enigma(const std::string& name, const Difficulty& difficulty, const int& numOfElements);
 
+        Enigma::Enigma(const std::string& name, const Difficulty& difficulty, const unsigned int& numOfElements,
+                       const set<string>& elements);
+
+        Enigma(const std::string& name, const Difficulty& difficulty);
 
         //copy constructor
         //
@@ -77,12 +81,19 @@ namespace escaperoom{
         //
         string getName() const;
 
+        //add Element to the set
+        void addElement(const string& element);
+
+        //remove element from the set
+        void removeElement(const string& element);
+
+        //return the number of elements
         int getNumOfElements() const;
 
     };
 
     std::ostream& operator<<(std::ostream& output, const Enigma& enigma);
-} // end of namespace eascaperoom
+    } // end of namespace eascaperoom
 } // end of namespace mtm
 
 

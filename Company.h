@@ -1,7 +1,6 @@
 #ifndef COMPANY_H
 #define COMPANY_H
 
-
 #include <iostream>
 #include <string.h>
 #include <set>
@@ -19,6 +18,10 @@ namespace mtm{
         }RoomType;
 
         class Company{
+            string name;
+            string phoneNumber;
+            set<EscapeRoomWrapper*> rooms;
+
         public:
 
             //// Constructs a new Company with the specified data.

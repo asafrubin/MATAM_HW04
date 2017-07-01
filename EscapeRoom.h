@@ -30,7 +30,7 @@ EscapeRoom escapeRoomCreate(char *name, int maxTime, int maxParticipants, int le
 EscapeRoom escapeRoomCopy(EscapeRoom room);
 
 //Functions Checks if rooms are equal by this conditions:
-//Two rooms will be equal if their power is equal.
+//Two rooms will be equal if their power is equal and their name is equal.
 //power(room) = (level*maxTime)/maxParticipants.
 //
 //@param: room1 - the first room to be compared.
