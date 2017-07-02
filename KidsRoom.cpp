@@ -22,6 +22,11 @@ void KidsRoom::setNewAgeLimit(const int &limit)
     age_limit = limit;
 }
 
+KidsRoom *KidsRoom::clone() const
+{
+    return new KidsRoom(*this);
+}
+
 int KidsRoom::getAgeLimit() const
 {
     return age_limit;

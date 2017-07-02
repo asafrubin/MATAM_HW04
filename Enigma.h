@@ -30,7 +30,7 @@ namespace escaperoom{
         // @param numOfElements : the number of elements in the enigma.
         Enigma(const std::string& name, const Difficulty& difficulty, const int& numOfElements);
 
-        Enigma::Enigma(const std::string& name, const Difficulty& difficulty, const unsigned int& numOfElements,
+        Enigma(const std::string& name, const Difficulty& difficulty, const unsigned int& numOfElements,
                        const set<string>& elements);
 
         Enigma(const std::string& name, const Difficulty& difficulty);

@@ -46,7 +46,10 @@ EscapeRoomWrapper& EscapeRoomWrapper::operator=(const EscapeRoomWrapper& room)
 
     return *this;
 }
-
+EscapeRoomWrapper* EscapeRoomWrapper::clone() const
+{
+    return new EscapeRoomWrapper(*this);
+}
 bool EscapeRoomWrapper::operator==(const EscapeRoomWrapper& room) const
 {
     return areEqualRooms(this->room, room.room);
@@ -117,9 +120,10 @@ EscapeRoomWrapper::~EscapeRoomWrapper()
     escapeRoomDestroy(this->room);
 }
 
-std::ostream& operator<<(std::ostream& output, const EscapeRoomWrapper& room)
+std::ostream& mtm::escaperoom::operator<<(std::ostream& output, const EscapeRoomWrapper& room)
 {
-    output << room.getName() << " ("  << room.getMaxTime() << "/" << room.level() << "/" << room.getMaxParticipants() << ")";
+    output << room.getName() << " ("  << room.getMaxTime() << "/" << room.level() << "/"
+           << room.getMaxParticipants() << ")";
     return output;
 }
 

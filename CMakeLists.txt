@@ -23,6 +23,6 @@ set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -Werror -pedantic-errors -DNDEBUG")
 #set(SOURCE_FILES KidsRoom.cpp KidsRoom_test.cpp KidsRoom.h)
 
 #test company
-set(SOURCE_FILES Company.h Company.cpp Company_test.cpp Company.cpp Company_test.cpp)
+set(SOURCE_FILES Company.h Company.cpp Company_test.cpp Company.cpp Company_test.cpp Enigma.h Enigma.cpp KidsRoom.h KidsRoom.cpp ScaryRoom.h ScaryRoom.cpp EscapeRoomWrapper.h EscapeRoomWrapper.cpp EscapeRoom.h EscapeRoom.c)
 
 add_executable(HW04 ${SOURCE_FILES})

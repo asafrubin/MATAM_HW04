@@ -1,3 +1,4 @@
+#include "EscapeRoomWrapper.h"
 #include "Company.h"
 #include "ScaryRoom.h"
 #include "KidsRoom.h"
@@ -29,10 +30,9 @@ Company& Company::operator=(const Company &company)
 void Company::createRoom(char *name, const int &escapeTime, const int &level, const int &maxParticipants)
 {
     try {
-        EscapeRoomWrapper *newRoom;
-        newRoom = new EscapeRoomWrapper(name, escapeTime, level, maxParticipants);
+        auto newRoom = new EscapeRoomWrapper(name, escapeTime, level, maxParticipants);
         rooms.insert(newRoom);
-    }catch (EscapeRoomMemoryProblemException e){
+    }catch (EscapeRoomMemoryProblemException& e){
         throw CompanyMemoryProblemException();
     }
 }
@@ -70,9 +70,9 @@ set<EscapeRoomWrapper*> Company::getAllRooms() const
 
 void Company::removeRoom(const EscapeRoomWrapper &room)
 {
-    for(auto it = rooms.begin(); it != rooms.end(); it++){
-        if(**it == room){
-            delete *it;
+    for(auto it : rooms){
+        if(*it == room){
+            delete it;
             rooms.erase(it);
             return;
         }
@@ -84,8 +84,9 @@ void Company::removeRoom(const EscapeRoomWrapper &room)
 void Company::addEnigma(const EscapeRoomWrapper &room, const Enigma &enigma)
 {
     for(auto it = rooms.begin(); it != rooms.end(); it++){
-        if(**it == rooms){
+        if(**it == room){
             (*it)->addEnigma(enigma);
+            return;
         }
     }
 
@@ -98,10 +99,10 @@ void Company::removeEnigma(const EscapeRoomWrapper &room, const Enigma &enigma)
         if(**it == room){
             try {
                 (*it)->removeEnigma(enigma);
-            }catch(CompanyRoomHasNoEnigmasException e){
+            }catch(CompanyRoomHasNoEnigmasException& e){
                 throw CompanyRoomHasNoEnigmasException();
-            }catch(CompanyRoomHasNoEnigmasException e){
-                throw CompanyRoomHasNoEnigmasException();
+            }catch(CompanyRoomNotFoundException& e){
+                throw CompanyRoomNotFoundException();
             }catch(...){
                 throw;
             }
@@ -151,21 +152,21 @@ set<EscapeRoomWrapper*> Company::getAllRoomsByType(RoomType type) const
 {
     std::set<EscapeRoomWrapper*> newSet;
 
-    for(auto it = rooms.begin(); it != rooms.end(); it++) {
+    for(auto &it : rooms) {
         switch (type) {
             case (BASE_ROOM):
-                if( !dynamic_cast<ScaryRoom*>(*it) && !dynamic_cast<KidsRoom*>(*it)){
-                    newSet.insert(*it);
+                if( !dynamic_cast<ScaryRoom*>(it) && !dynamic_cast<KidsRoom*>(it)){
+                    newSet.insert(it);
                 }
                 break;
             case (SCARY_ROOM):
-                if(dynamic_cast<ScaryRoom*>(*it)){
-                    newSet.insert(*it);
+                if(dynamic_cast<ScaryRoom*>(it)){
+                    newSet.insert(it);
                 }
                 break;
             case (KIDS_ROOM):
-                if(dynamic_cast<KidsRoom*>(*it)){
-                    newSet.insert(*it);
+                if(dynamic_cast<KidsRoom*>(it)){
+                    newSet.insert(it);
                 }
                 break;
         }
@@ -183,7 +184,7 @@ EscapeRoomWrapper* Company::getRoomByName(const string &name) const
     throw CompanyRoomNotFoundException();
 }
 
-std::ostream& Company::operator<<(std::ostream &output, const Company &company)
+std::ostream& mtm::escaperoom::operator<<(std::ostream &output, const Company &company)
 {
     output << company.name << " : " << company.phoneNumber << std::endl;
     for(auto it : company.rooms){

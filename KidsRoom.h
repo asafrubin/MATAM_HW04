@@ -20,7 +20,10 @@ namespace mtm {
 
             friend std::ostream& operator<<(std::ostream& output, const KidsRoom& kidsRoom);
 
+            virtual KidsRoom* clone() const;
+
         };
+
         //Kids Room: <name> (<maxTime>/<level>/<maxParticipants>/<ageLimit>)
         std::ostream& operator<<(std::ostream& output, const KidsRoom& kidsRoom);
 

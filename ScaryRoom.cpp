@@ -34,6 +34,11 @@ int ScaryRoom::getAgeLimit() const
             return age_limit;
 }
 
+ScaryRoom* ScaryRoom::clone() const
+{
+    return new ScaryRoom(*this);
+}
+
 std::ostream& operator<<(std::ostream& output, const ScaryRoom& scaryRoom)
 {
     output << "ScaryRoom: " << scaryRoom.getName() << " (" << scaryRoom.getMaxTime() << "/" << scaryRoom.level()

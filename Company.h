@@ -141,7 +141,7 @@ namespace mtm{
             friend std::ostream& operator<<(std::ostream& output, const Company& company);
 
             //Destructor
-            ~Company();
+            ~Company() = default;
         };
 
         std::ostream& operator<<(std::ostream& output, const Company& company);

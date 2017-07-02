@@ -24,6 +24,8 @@ namespace mtm{
 
             int getAgeLimit() const;
 
+            virtual ScaryRoom* clone() const;
+
             // print in this format : Scary Room: <name> (<maxTime>/<level>/<maxParticipants>/<ageLimit>)
             friend std::ostream& operator<<(std::ostream& output, const ScaryRoom& scaryRoom);
 

@@ -16,6 +16,9 @@ namespace escaperoom {
         EscapeRoom room;
         std::vector<Enigma> enigmaVector;
 
+    protected:
+        virtual EscapeRoomWrapper* clone() const;
+
     public:
 
         // Constructs a new Escape Room with the specified data.
@@ -82,7 +85,7 @@ namespace escaperoom {
         void rate(const int& newRate) const;
 
         // Destructor for EscapeRoomWrapper
-        ~EscapeRoomWrapper();
+        virtual ~EscapeRoomWrapper();
 
         // Prints the data of the Room in the following format:
         //
